@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Addon Marketplace — Zinc Launcher</title>
+<meta name="description" content="Community themes and addons for Zinc Launcher. Browse the catalog and install with one click straight from the launcher.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/zinc-launcher.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><img src="assets/zinc-launcher.png" alt=""> Zinc Launcher</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="marketplace.html" style="color:var(--text-1)">Marketplace</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌓</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero-title">Addon Marketplace</h1>
+      <p class="hero-tagline">Motywy i addony społeczności dla Zinc Launchera. Przeglądaj katalog i instaluj jednym kliknięciem bezpośrednio z launchera — bez ręcznego plikowania.</p>
+      <div class="hero-actions">
+        <a href="zinclauncher://page/marketplace" class="btn primary">Otwórz w launcherze</a>
+        <a href="downloads.html" class="btn outline">Nie masz launchera? Pobierz</a>
+      </div>
+      <p class="marketplace-note">Deep link <code class="mono">zinclauncher://page/marketplace</code> — przeglądarka zapyta o otwarcie Zinc Launchera, jeśli jest zainstalowany.</p>
+    </section>
+
+    <!-- Katalog -->
+    <section>
+      <div class="section-head">
+        <h2>Katalog</h2>
+        <p class="catalog-intro" style="color:var(--text-2); max-width: 64ch;">Motywy i addony gotowe do zainstalowania — kliknij „Pobierz”, a Zinc Launcher resztę załatwi sam.</p>
+      </div>
+      <div class="chips">
+        <button class="chip active" data-filter="all">Wszystkie</button>
+        <button class="chip" data-filter="theme">Motywy</button>
+        <button class="chip" data-filter="addon">Addony</button>
+      </div>
+      <div id="marketplace-loading" class="loading">
+        <div class="spinner"></div>
+        <p>Ładuję katalog…</p>
+      </div>
+      <div id="marketplace-grid" class="marketplace-grid"></div>
+      <div id="marketplace-error" class="doc-callout" style="display:none;">
+        <strong>Nie udało się załadować katalogu.</strong> Sprawdź połączenie lub przejrzyj addony w <a href="https://github.com/ace2821/zinc-marketplace" target="_blank" rel="noopener">repozytorium na GitHubie</a>.
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="downloads.html">Downloads</a>
+    </div>
+    <div class="footer-note">License: MIT &nbsp;|&nbsp; <a href="https://github.com/ace2821/Zinc-Launcher" target="_blank" rel="noopener">GitHub</a> &nbsp;|&nbsp; <a href="https://github.com/ace2821/Zinc-Launcher/releases" target="_blank" rel="noopener">Releases</a></div>
+    <div class="footer-note">No telemetry. No accounts.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---- Theme (same as other pages) ----
+  var html = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+
+  function setTheme(t) {
+    if (t === 'light') {
+      html.setAttribute('data-theme', 'light');
+      toggle.textContent = '☀️';
+      toggle.setAttribute('aria-pressed', 'true');
+    } else {
+      html.removeAttribute('data-theme');
+      toggle.textContent = '🌓';
+      toggle.setAttribute('aria-pressed', 'false');
+    }
+    localStorage.setItem('zinc-theme', t);
+  }
+
+  var stored = localStorage.getItem('zinc-theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme = (stored === 'light' || stored === 'dark') ? stored : (prefersDark ? 'dark' : 'light');
+  setTheme(theme);
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    if (!localStorage.getItem('zinc-theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  toggle.addEventListener('click', function () {
+    var isLight = html.hasAttribute('data-theme');
+    setTheme(isLight ? 'dark' : 'light');
+  });
+
+  // ---- Mobile nav ----
+  var navToggle = document.getElementById('navToggle');
+  var nav = document.getElementById('nav');
+  navToggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      nav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ---- Marketplace catalog ----
+  (function loadCatalog() {
+    var grid = document.getElementById('marketplace-grid');
+    var loading = document.getElementById('marketplace-loading');
+    var error = document.getElementById('marketplace-error');
+    var chips = document.querySelectorAll('.chip');
+    var URL = 'https://raw.githubusercontent.com/ace2821/zinc-marketplace/main/catalog.json';
+    var items = [];
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function initials(name) {
+      if (!name) return '?';
+      return String(name)
+        .split(/\s+/)
+        .map(function (w) { return w.slice(0, 1); })
+        .join('')
+        .toUpperCase()
+        .slice(0, 2) || '?';
+    }
+
+    function render(list, filter) {
+      loading.style.display = 'none';
+      var filtered = filter === 'all' ? list : list.filter(function (i) { return i.type === filter; });
+      if (!filtered.length) {
+        grid.innerHTML = '<p style="color:var(--text-2);">Brak pasujących pozycji w katalogu.</p>';
+        return;
+      }
+      grid.innerHTML = filtered.map(function (item) {
+        var id = escapeHtml(item.id || '');
+        var type = item.type || 'addon';
+        var name = escapeHtml(item.name || 'Bez nazwy');
+        var author = escapeHtml(item.author || '—');
+        var version = item.version ? 'v' + escapeHtml(String(item.version)) : '';
+        var games = item.games && item.games.length ? escapeHtml(String(item.games.join(', '))) : '';
+        var tag = type === 'theme' ? 'Motyw' : 'Addon';
+        var media = item.previewUrl
+          ? '<img src="' + escapeHtml(item.previewUrl) + '" alt="Podgląd ' + name + '" loading="lazy">'
+          : '<div class="marketplace-initials">' + initials(name) + '</div>';
+        return [
+          '<article class="marketplace-card">',
+          '<div class="marketplace-preview">' + media + '</div>',
+          '<div class="marketplace-card-body">',
+          '<div class="marketplace-card-header"><h4>' + name + '</h4><span class="marketplace-meta">' + version + '</span></div>',
+          '<p class="marketplace-author">by ' + author + '</p>',
+          games ? '<p class="marketplace-games">' + games + '</p>' : '',
+          '<div class="marketplace-tags"><span class="marketplace-tag">' + tag + '</span></div>',
+          '<a href="zinclauncher://install?id=' + id + '" class="btn primary">Pobierz</a>',
+          '</div>',
+          '</article>'
+        ].join('');
+      }).join('');
+    }
+
+    function showError() {
+      loading.style.display = 'none';
+      error.style.display = 'block';
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        render(items, chip.getAttribute('data-filter'));
+      });
+    });
+
+    fetch(URL, { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        items = Array.isArray(data) ? data : (data.addons || data.items || []);
+        render(items, 'all');
+      })
+      .catch(showError);
+  })();
+})();
+</script>
+</body>
+</html>

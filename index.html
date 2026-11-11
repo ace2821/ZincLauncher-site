@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Zinc Launcher — Local-first game library manager for Linux</title>
+<meta name="description" content="Zinc Launcher: local-first game library manager and launcher for Linux. Organize, launch and mod the games you already own. No store clients, no accounts, no telemetry.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/zinc-launcher.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><img src="assets/zinc-launcher.png" alt=""> Zinc Launcher</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="marketplace.html">Marketplace</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌓</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero container">
+    <h1 class="hero-title">Zinc Launcher</h1>
+    <p class="hero-tagline">Local-first game library manager and launcher for Linux. Organize, launch and mod the games you already own — DRM-free purchases, freeware, plain folders and Windows titles through Wine. No store clients, no accounts, no telemetry.</p>
+    <div class="hero-actions">
+      <a href="downloads.html" class="btn primary">Download (AppImage)</a>
+      <a href="https://github.com/ace2821/Zinc-Launcher" class="btn outline" target="_blank" rel="noopener">View source</a>
+    </div>
+    <div class="meta">v1.2.6 <span class="tag">•</span> Linux <span class="tag">•</span> MIT <span class="tag">•</span> Tauri 2</div>
+  </section>
+
+  <!-- At a glance -->
+  <section id="features" class="container">
+    <div class="section-head"><h2>At a glance</h2></div>
+    <div class="glance-grid">
+      <div class="card">
+        <h4>Library</h4>
+        <p>Scan folders, cover art with monogram fallbacks, playtime and recents, favorites, notes, tags, hiding.</p>
+      </div>
+      <div class="card">
+        <h4>Launch</h4>
+        <p>Per-game options, Wine per-game prefix, GameMode and MangoHud, session recording.</p>
+      </div>
+      <div class="card">
+        <h4>Mods</h4>
+        <p>Loader detection (BepInEx, MelonLoader, CLEO, Script Hook, Frosty and more), GitHub releases, zip/7z/rar drops.</p>
+      </div>
+      <div class="card">
+        <h4>Multiplayer</h4>
+        <p>SA-MP, FiveM, MTA badges; SA-MP host, port and nickname options.</p>
+      </div>
+      <div class="card">
+        <h4>Big Picture</h4>
+        <p>Console-style, gamepad-friendly layout reusing the same library data.</p>
+      </div>
+      <div class="card">
+        <h4>Saves</h4>
+        <p>Auto-backup before sessions plus version history and one-click restore.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section id="screenshots" class="container">
+    <div class="section-head"><h2>Screenshots</h2></div>
+    <div class="screenshot-grid">
+      <div class="screenshot-wrap">
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-address">zinc-launcher — library</div>
+          </div>
+          <img src="assets/screenshots/library.png" alt="Zinc Launcher library view with cover grid">
+        </div>
+        <p class="screenshot-caption">Library — cover grid with playtime, favorites and tags.</p>
+      </div>
+      <div class="screenshot-wrap">
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-address">zinc-launcher — mods installed</div>
+          </div>
+          <img src="assets/screenshots/mods-installed.png" alt="Zinc Launcher mods installed view">
+        </div>
+        <p class="screenshot-caption">Mods — installed loaders and mod list per game.</p>
+      </div>
+      <div class="screenshot-wrap">
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-address">zinc-launcher — mods install</div>
+          </div>
+          <img src="assets/screenshots/mods-install.png" alt="Zinc Launcher mods install view">
+        </div>
+        <p class="screenshot-caption">Mods — install from GitHub releases or drop zip/7z/rar archives.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features in detail -->
+  <section class="container">
+    <div class="section-head"><h2>Features in detail</h2></div>
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h4>Library</h4>
+        <ul>
+          <li>Scan folders you point it at</li>
+          <li>Cover art via Steam search with monogram fallbacks</li>
+          <li>Playtime and recents tracking</li>
+          <li>Favorites, notes, tags, hiding</li>
+          <li>Metadata from Steam, SteamGridDB, ScreenScraper, local files</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Launch</h4>
+        <ul>
+          <li>Per-game options: executable, arguments, working directory, environment</li>
+          <li>Windows titles via Wine with a managed prefix per game</li>
+          <li>GameMode and MangoHud toggles</li>
+          <li>Every session recorded with duration and exit code</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Mods</h4>
+        <ul>
+          <li>Detects BepInEx 5/6, MelonLoader, NeoModLoader, MSC Mod Loader, tModLoader</li>
+          <li>CLEO 5/4 &amp; Redux, Script Hook IV/V, Frosty</li>
+          <li>Install loaders from GitHub releases</li>
+          <li>Drop zip / 7z / rar archives onto a game</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Multiplayer clients</h4>
+        <ul>
+          <li>SA-MP, FiveM, MTA badges</li>
+          <li>SA-MP host, port and nickname options</li>
+          <li>Maps to client launch flags</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Big Picture</h4>
+        <ul>
+          <li>Console-style, gamepad-friendly layout</li>
+          <li>D-pad / shoulder navigation</li>
+          <li>Reuses the same library data</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Saves</h4>
+        <ul>
+          <li>Auto-backup before each session</li>
+          <li>Versioned snapshots per game</li>
+          <li>One-click restore</li>
+          <li>Auto-detected or user-defined save paths</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section id="install" class="container">
+    <div class="section-head"><h2>Install</h2></div>
+    <div class="install-wrap">
+      <div class="install-step">
+        <h4>AppImage (recommended)</h4>
+        <p>Works on any glibc-based distro. Download directly below, then:</p>
+        <div class="code-wrap">
+          <button class="copy-btn" data-target="appimage">Copy</button>
+          <pre><code>chmod +x "Zinc-Launcher-1.2.6-x86_64.AppImage"
+./"Zinc-Launcher-1.2.6-x86_64.AppImage"</code></pre>
+        </div>
+      </div>
+      <div class="install-step">
+        <h4>Flatpak</h4>
+        <p>Flathub submission is in progress. Until then, build the Flatpak yourself from the manifest in <code class="mono">flatpak/</code>.</p>
+      </div>
+      <div class="install-step">
+        <h4>Build from source</h4>
+        <p>Arch / CachyOS example; equivalent packages exist on other distros:</p>
+        <div class="code-wrap">
+          <button class="copy-btn" data-target="source">Copy</button>
+          <pre><code>sudo pacman -S --needed webkit2gtk-4.1 patchelf
+bun install
+bun run tauri dev    # full app
+bun run dev          # frontend only, mock IPC</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech stack -->
+  <section class="container">
+    <div class="section-head"><h2>Tech stack</h2></div>
+    <table>
+      <thead>
+        <tr><th>Area</th><th>Choice</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Platform</td><td>Linux first (Arch / CachyOS dev target)</td></tr>
+        <tr><td>Shell</td><td>Tauri 2 (Rust core + WebView UI)</td></tr>
+        <tr><td>Frontend</td><td>React + TypeScript + Vite</td></tr>
+        <tr><td>Database</td><td>SQLite (rusqlite, bundled)</td></tr>
+        <tr><td>Config</td><td>TOML (~/.config/zinc-launcher/config.toml)</td></tr>
+        <tr><td>Packaging</td><td>AppImage</td></tr>
+        <tr><td>License</td><td>MIT</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="container">
+    <div class="section-head"><h2>Roadmap</h2></div>
+    <ul class="roadmap">
+      <li>Flathub publish (with bundled Wine for Windows titles inside the sandbox)</li>
+      <li>More multiplayer client adapters</li>
+      <li>Scheduled loader update checks instead of on-demand only</li>
+      <li>Cover art from more providers</li>
+    </ul>
+  </section>
+
+  <!-- Source -->
+  <section id="source" class="container">
+    <div class="section-head"><h2>Source</h2></div>
+    <p class="hero-tagline" style="margin-bottom:1rem;">Zinc Launcher is open source under the MIT license. Contributions, issues and releases live on GitHub.</p>
+    <div class="source-grid">
+      <a href="https://github.com/ace2821/Zinc-Launcher" class="btn outline" target="_blank" rel="noopener">GitHub repository</a>
+      <a href="https://github.com/ace2821/Zinc-Launcher/releases" class="btn outline" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/ace2821/Zinc-Launcher/issues" class="btn outline" target="_blank" rel="noopener">Issues</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="downloads.html">Downloads</a>
+    </div>
+    <div class="footer-note">License: MIT &nbsp;|&nbsp; <a href="https://github.com/ace2821/Zinc-Launcher" target="_blank" rel="noopener">GitHub</a> &nbsp;|&nbsp; <a href="https://github.com/ace2821/Zinc-Launcher/releases" target="_blank" rel="noopener">Releases</a></div>
+    <div class="footer-note">No telemetry. No accounts.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---- Theme init (runs before body paints to avoid flash) ----
+  var html = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+
+  function setTheme(t) {
+    if (t === 'light') {
+      html.setAttribute('data-theme', 'light');
+      toggle.textContent = '☀️';
+      toggle.setAttribute('aria-pressed', 'true');
+    } else {
+      html.removeAttribute('data-theme');
+      toggle.textContent = '🌓';
+      toggle.setAttribute('aria-pressed', 'false');
+    }
+    localStorage.setItem('zinc-theme', t);
+  }
+
+  // Resolve theme: localStorage > system preference > dark (brand default)
+  var stored = localStorage.getItem('zinc-theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme;
+  if (stored === 'light' || stored === 'dark') {
+    theme = stored;
+  } else {
+    theme = prefersDark ? 'dark' : 'light';
+  }
+  setTheme(theme);
+
+  // Re-evaluate when system preference changes (only if no manual choice stored)
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    if (!localStorage.getItem('zinc-theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  toggle.addEventListener('click', function () {
+    var isLight = html.hasAttribute('data-theme');
+    setTheme(isLight ? 'dark' : 'light');
+  });
+
+  // ---- Mobile nav ----
+  var navToggle = document.getElementById('navToggle');
+  var nav = document.getElementById('nav');
+  navToggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      nav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ---- Copy buttons ----
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.parentElement.querySelector('pre code');
+      if (!pre) return;
+      navigator.clipboard.writeText(pre.textContent).then(function () {
+        btn.classList.add('copied');
+        btn.textContent = 'Copied!';
+        setTimeout(function () {
+          btn.classList.remove('copied');
+          btn.textContent = 'Copy';
+        }, 1200);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

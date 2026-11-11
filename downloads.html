@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Downloads — Zinc Launcher</title>
+<meta name="description" content="Download Zinc Launcher directly: AppImage and .desktop file. No GitHub account required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/zinc-launcher.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><img src="assets/zinc-launcher.png" alt=""> Zinc Launcher</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="downloads.html" style="color:var(--text-1)">Downloads</a>
+      <a href="marketplace.html">Marketplace</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌓</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="section-head">
+      <h2>Downloads</h2>
+    </div>
+    <p style="color:var(--text-2); margin-bottom: 1.5rem; max-width: 64ch;">Download Zinc Launcher directly from this site — no GitHub account or releases page needed. If desktop integration doesn't work out of the box, grab the <code class="mono">.desktop</code> file below and place it in <code class="mono">~/.local/share/applications/</code>.</p>
+
+    <div class="download-grid">
+      <div class="download-card">
+        <div>
+          <h4>Zinc Launcher AppImage</h4>
+          <p>Works on any glibc-based distro. Includes the full Tauri 2 application (Rust core + WebView UI). Version 1.2.6, x86-64.</p>
+          <div class="doc-callout" style="margin-top:0.75rem; border-left-color: var(--accent);">
+            <strong>Direct download not available:</strong> the AppImage is ≈112 MB, which exceeds GitHub Pages' 100 MB per-file limit. Download it from GitHub Releases instead:
+          </div>
+          <div>
+            <span class="file-badge">Zinc-Launcher-1.2.6-x86_64.AppImage</span>
+            <span class="file-badge" style="color:var(--text-3)">≈ 112 MB</span>
+          </div>
+        </div>
+        <div class="download-actions">
+          <a href="https://github.com/ace2821/Zinc-Launcher/releases/tag/v1.2.6" class="btn primary download" target="_blank" rel="noopener">Download AppImage (GitHub Releases)</a>
+        </div>
+        <div class="code-wrap" style="margin-top:0.5rem;">
+          <pre><code>chmod +x "Zinc-Launcher-1.2.6-x86_64.AppImage"
+./"Zinc-Launcher-1.2.6-x86_64.AppImage"</code></pre>
+        </div>
+      </div>
+
+      <div class="download-card">
+        <div>
+          <h4>.desktop file</h4>
+          <p>Desktop entry for KDE / GNOME / Xfce menus. Use this if launcher integration doesn't work automatically. Place it in <code class="mono">~/.local/share/applications/</code> and adjust the <code class="mono">Exec</code> path to your AppImage location.</p>
+          <div>
+            <span class="file-badge">zinc-launcher.desktop</span>
+          </div>
+        </div>
+        <div class="download-actions">
+          <a href="assets/downloads/zinc-launcher.desktop" class="btn primary download" download>Download .desktop</a>
+        </div>
+        <div class="code-wrap" style="margin-top:0.5rem;">
+          <pre><code># Install to applications menu
+cp zinc-launcher.desktop ~/.local/share/applications/
+update-desktop-database ~/.local/share/applications/</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-callout" style="margin-top:2rem;">
+      <strong>Prefer GitHub Releases?</strong> The same files are also published on <a href="https://github.com/ace2821/Zinc-Launcher/releases" target="_blank" rel="noopener">GitHub Releases</a>. Direct downloads here are a convenience mirror.
+    </div>
+
+    <h3 style="font-weight:600; font-size:1.1rem; color:var(--text-1); margin:2rem 0 0.5rem;">Install after download</h3>
+    <div class="code-wrap">
+      <pre><code># 1. Make the AppImage executable
+chmod +x "Zinc-Launcher-1.2.6-x86_64.AppImage"
+
+# 2. Run it
+./"Zinc-Launcher-1.2.6-x86_64.AppImage"
+
+# 3. (Optional) Install .desktop for menu integration
+cp zinc-launcher.desktop ~/.local/share/applications/
+update-desktop-database ~/.local/share/applications/</code></pre>
+    </div>
+
+    <section id="changelog">
+      <div class="section-head" style="margin-top:2.5rem;">
+        <h2>Release notes</h2>
+      </div>
+
+      <article class="release-entry">
+        <h3 style="font-weight:600; font-size:1.1rem; color:var(--text-1); margin:0 0 0.25rem;">1.2.6 <span class="file-badge" style="vertical-align:middle;">latest</span></h3>
+        <p style="color:var(--text-1); margin:0.35rem 0 0; font-weight:500;">What's new in 1.2.6</p>
+        <ul style="color:var(--text-2); margin:0.5rem 0 0; padding-left:1.25rem;">
+          <li><strong>Big Picture w stylu PS5</strong> — nowy layout z sekcją modów.</li>
+          <li><strong>Statystyki czasu gry</strong> — podsumowanie sesji i łącznego czasu.</li>
+          <li><strong>Okładki Big Picture</strong> — dedykowane okładki oraz automatyczne pobieranie.</li>
+          <li><strong>Poprawki modów</strong> — WorldBox i NeoModLoader.</li>
+          <li><strong>Pełny rebrand na Zinc</strong> — nowa nazwa, ikona i identyfikatory.</li>
+        </ul>
+      </article>
+
+      <article class="release-entry" style="margin-top:1.5rem;">
+        <h3 style="font-weight:600; font-size:1.1rem; color:var(--text-1); margin:0 0 0.25rem;">1.2.0</h3>
+        <ul style="color:var(--text-2); margin:0.5rem 0 0; padding-left:1.25rem;">
+          <li><strong>Addon Marketplace</strong> — motywy i addony dostępne bezpośrednio w launcherze.</li>
+          <li><strong>Wykrywanie konfliktów modów</strong> — ostrzega o nakładających się plikach (overlapping files).</li>
+          <li><strong>Marketplace w launcherze</strong> — przeglądanie i instalacja jednym kliknięciem.</li>
+          <li><strong>Deep-link</strong> <code class="mono">zinclauncher://</code> — instalacja addonów bezpośrednio ze strony.</li>
+        </ul>
+      </article>
+
+      <article class="release-entry" style="margin-top:1.5rem;">
+        <h3 style="font-weight:600; font-size:1.1rem; color:var(--text-1); margin:0 0 0.25rem;">1.1.0</h3>
+        <ul style="color:var(--text-2); margin:0.5rem 0 0; padding-left:1.25rem;">
+          <li>Rozszerzony katalog mod loaderów (NeoModLoader, tModLoader, CLEO, Script Hook, Frosty, MSC).</li>
+          <li>Adaptery klientów multiplayer: SA-MP / FiveM / MTA.</li>
+          <li>Przygotowanie pod Flathub: manifest, AppStream metainfo, ikona aplikacji.</li>
+          <li>Tray z graceful degradation bez libappindicator.</li>
+        </ul>
+      </article>
+
+      <article class="release-entry" style="margin-top:1.5rem;">
+        <h3 style="font-weight:600; font-size:1.1rem; color:var(--text-1); margin:0 0 0.25rem;">0.1.0</h3>
+        <ul style="color:var(--text-2); margin:0.5rem 0 0; padding-left:1.25rem;">
+          <li>Pierwsze publiczne wydanie.</li>
+          <li>Big Picture (Xbox / PlayStation), okładki Steam, BepInEx / MelonLoader.</li>
+          <li>GameMode + MangoHud, licznik czasu gry, prefiksy Wine, interfejs EN / PL.</li>
+        </ul>
+      </article>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="downloads.html">Downloads</a>
+    </div>
+    <div class="footer-note">License: MIT &nbsp;|&nbsp; <a href="https://github.com/ace2821/Zinc-Launcher" target="_blank" rel="noopener">GitHub</a> &nbsp;|&nbsp; <a href="https://github.com/ace2821/Zinc-Launcher/releases" target="_blank" rel="noopener">Releases</a></div>
+    <div class="footer-note">No telemetry. No accounts.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var html = document.documentElement;
+  var toggle = document.getElementById('themeToggle');
+
+  function setTheme(t) {
+    if (t === 'light') {
+      html.setAttribute('data-theme', 'light');
+      toggle.textContent = '☀️';
+      toggle.setAttribute('aria-pressed', 'true');
+    } else {
+      html.removeAttribute('data-theme');
+      toggle.textContent = '🌓';
+      toggle.setAttribute('aria-pressed', 'false');
+    }
+    localStorage.setItem('zinc-theme', t);
+  }
+
+  var stored = localStorage.getItem('zinc-theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme;
+  if (stored === 'light' || stored === 'dark') {
+    theme = stored;
+  } else {
+    theme = prefersDark ? 'dark' : 'light';
+  }
+  setTheme(theme);
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    if (!localStorage.getItem('zinc-theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  toggle.addEventListener('click', function () {
+    var isLight = html.hasAttribute('data-theme');
+    setTheme(isLight ? 'dark' : 'light');
+  });
+
+  var navToggle = document.getElementById('navToggle');
+  var nav = document.getElementById('nav');
+  navToggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      nav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
+</body>
+</html>
