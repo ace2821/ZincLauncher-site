@@ -19,6 +19,7 @@
     <a href="index.html" class="logo"><img src="assets/zinc-launcher.png" alt=""> Zinc Launcher</a>
     <nav class="nav" id="nav">
       <a href="index.html">Home</a>
+      <a href="index.html#why-zinc">Why Zinc</a>
       <a href="documentation.html">Documentation</a>
       <a href="downloads.html">Downloads</a>
       <a href="marketplace.html">Marketplace</a>
@@ -37,7 +38,7 @@
       <a href="downloads.html" class="btn primary">Download (AppImage)</a>
       <a href="https://github.com/ace2821/Zinc-Launcher" class="btn outline" target="_blank" rel="noopener">View source</a>
     </div>
-    <div class="meta">v1.2.6 <span class="tag">•</span> Linux <span class="tag">•</span> MIT <span class="tag">•</span> Tauri 2</div>
+    <div class="meta">v1.2.0 <span class="tag">•</span> Linux <span class="tag">•</span> MIT <span class="tag">•</span> Tauri 2</div>
   </section>
 
   <!-- At a glance -->
@@ -168,6 +169,63 @@
     </div>
   </section>
 
+  <!-- Why Zinc -->
+  <section id="why-zinc" class="container">
+    <div class="section-head"><h2>Why Zinc instead of Lutris or Heroic?</h2></div>
+    <p style="max-width:52rem;">Lutris and Heroic are excellent at what they do — Lutris is a script-runner for store installs, Heroic is a GOG/Epic/Amazon client. Zinc Launcher solves a different problem: <strong>your games, your folders</strong>. It manages the library you already own and puts mod loading first, without scripts, store accounts or a runtime you have to babysit.</p>
+    <div style="overflow-x:auto; margin-top:1.5rem;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+        <thead>
+          <tr style="text-align:left; border-bottom:1px solid var(--border-strong, #444);">
+            <th style="padding:0.6rem 0.75rem;">Capability</th>
+            <th style="padding:0.6rem 0.75rem;">Zinc Launcher</th>
+            <th style="padding:0.6rem 0.75rem;">Lutris</th>
+            <th style="padding:0.6rem 0.75rem;">Heroic</th>
+          </tr>
+        </thead>
+        <tbody style="color:var(--text-2, #bbb);">
+          <tr style="border-bottom:1px solid var(--border, #333);">
+            <td style="padding:0.55rem 0.75rem;">Local folders, no store required</td>
+            <td style="padding:0.55rem 0.75rem;">✓ Core concept — scan any game folder</td>
+            <td style="padding:0.55rem 0.75rem;">✓ But centered on installer scripts</td>
+            <td style="padding:0.55rem 0.75rem;">Only via store logins</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border, #333);">
+            <td style="padding:0.55rem 0.75rem;">Mod loading built in</td>
+            <td style="padding:0.55rem 0.75rem;">✓ Loader install, mod files, conflict detection — in-app</td>
+            <td style="padding:0.55rem 0.75rem;">Manual, per-game scripts</td>
+            <td style="padding:0.55rem 0.75rem;">No mod management</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border, #333);">
+            <td style="padding:0.55rem 0.75rem;">Store accounts / logins</td>
+            <td style="padding:0.55rem 0.75rem;">✓ None required</td>
+            <td style="padding:0.55rem 0.75rem;">Optional</td>
+            <td style="padding:0.55rem 0.75rem;">Required (GOG/Epic/Amazon)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border, #333);">
+            <td style="padding:0.55rem 0.75rem;">Themeable UI + marketplace</td>
+            <td style="padding:0.55rem 0.75rem;">✓ Themes &amp; addons, one-click install, deep links</td>
+            <td style="padding:0.55rem 0.75rem;">✗</td>
+            <td style="padding:0.55rem 0.75rem;">✗</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border, #333);">
+            <td style="padding:0.55rem 0.75rem;">Console-style Big Picture mode</td>
+            <td style="padding:0.55rem 0.75rem;">✓ PS5-style dashboard with mods panel</td>
+            <td style="padding:0.55rem 0.75rem;">✗</td>
+            <td style="padding:0.55rem 0.75rem;">✗</td>
+          </tr>
+          <tr>
+            <td style="padding:0.55rem 0.75rem;">Playtime statistics per game</td>
+            <td style="padding:0.55rem 0.75rem;">✓ Sessions tracked automatically</td>
+            <td style="padding:0.55rem 0.75rem;">Basic</td>
+            <td style="padding:0.55rem 0.75rem;">Basic</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="max-width:52rem; margin-top:1.25rem; color:var(--text-2, #bbb);">If you live in GOG/Epic stores, Heroic is the right tool for the storefront part — and Zinc plays nicely next to it. If you want one clean home for the games you already have, with mods that actually load, Zinc is built for you.</p>
+  </section>
+
   <!-- Install -->
   <section id="install" class="container">
     <div class="section-head"><h2>Install</h2></div>
@@ -177,8 +235,8 @@
         <p>Works on any glibc-based distro. Download directly below, then:</p>
         <div class="code-wrap">
           <button class="copy-btn" data-target="appimage">Copy</button>
-          <pre><code>chmod +x "Zinc.Launcher_1.2.6_amd64.AppImage"
-./"Zinc.Launcher_1.2.6_amd64.AppImage"</code></pre>
+          <pre><code>chmod +x "Zinc.Launcher_1.2.0_amd64.AppImage"
+./"Zinc.Launcher_1.2.0_amd64.AppImage"</code></pre>
         </div>
       </div>
       <div class="install-step">
