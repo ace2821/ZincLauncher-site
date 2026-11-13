@@ -40,6 +40,7 @@
           <li><a href="#library">Library Management</a></li>
           <li><a href="#launch">Launch &amp; Wine</a></li>
           <li><a href="#mods">Mods</a></li>
+          <li><a href="#submissions">Zgłaszanie motywów i pluginów</a></li>
           <li><a href="#configuration">Configuration</a></li>
           <li><a href="#faq">FAQ &amp; Troubleshooting</a></li>
         </ul>
@@ -98,6 +99,20 @@
             <li>Loaders Zinc installed can be checked for updates and reinstalled</li>
             <li>Non-destructive: enable/disable moves files to a stash, never deletes</li>
           </ul>
+        </section>
+
+        <section id="submissions" class="doc-section">
+          <h2>Zgłaszanie motywów i pluginów</h2>
+          <p>Chcesz udostępnić swój motyw CSS lub plugin (zip) w katalogu Zinc Launchera? Oto jak to zrobić krok po kroku:</p>
+          <ol>
+            <li><strong>Przygotuj plik:</strong> motyw to plik <code class="mono">.css</code> z własnymi zmiennymi tokenów CSS; plugin to archiwum <code class="mono">.zip</code> z wtyczką do launchera.</li>
+            <li><strong>Opublikuj plik publicznie:</strong> wrzuć go na GitHub (gist, release lub repo) i skopiuj bezpośredni, publiczny URL (np. raw.githubusercontent.com). Plik musi być dostępny bez logowania.</li>
+            <li><strong>Wypełnij formularz na stronie Marketplace:</strong> w sekcji „Dodaj swój motyw / plugin” podaj typ, nazwę, autora, opis, wersję i URL do pliku (opcjonalnie podgląd i grę dla pluginów).</li>
+            <li><strong>Zgłoszenie trafia na GitHub:</strong> kliknij „Wyślij zgłoszenie na GitHub” — otworzy się nowe issue w repozytorium <code class="mono">ace2821/zinc-marketplace</code> z danymi z formularza.</li>
+            <li><strong>Właściciel zatwierdza:</strong> po weryfikacji wpis pojawia się w <code class="mono">catalog.json</code> i jest dostępny w katalogu launchera.</li>
+          </ol>
+          <div class="doc-callout"><strong>SHA-256:</strong> launcher oblicza sumę SHA-256 pliku przy instalacji i weryfikuje ją — nie musisz jej podawać w zgłoszeniu, ale plik pod podanym URL musi pozostać niezmieniony.</div>
+          <div class="doc-callout"><strong>Zasady:</strong> zgłoszenie nie może zawierać malware ani reklam. Motyw może zawierać wyłącznie zmienne tokenów CSS.</div>
         </section>
 
         <section id="configuration" class="doc-section">

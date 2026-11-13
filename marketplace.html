@@ -61,6 +61,68 @@
         <strong>Nie udało się załadować katalogu.</strong> Sprawdź połączenie lub przejrzyj addony w <a href="https://github.com/ace2821/zinc-marketplace" target="_blank" rel="noopener">repozytorium na GitHubie</a>.
       </div>
     </section>
+
+    <!-- Zgłaszanie motywów / pluginów -->
+    <section class="submit-section" id="submit">
+      <div class="section-head">
+        <h2>Dodaj swój motyw / plugin</h2>
+        <p class="catalog-intro" style="color:var(--text-2); max-width: 64ch;">Masz własny motyw CSS lub plugin do Zinc Launchera? Wypełnij formularz — otworzymy zgłoszenie w repozytorium <code class="mono">ace2821/zinc-marketplace</code>, gdzie właściciel je zatwierdzi i doda do katalogu.</p>
+      </div>
+      <div class="submit-wrap">
+        <form id="submit-form" class="submit-form" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="submit-type">Typ <span class="req">*</span></label>
+              <select class="form-select" id="submit-type" required>
+                <option value="theme">Motyw (plik .css)</option>
+                <option value="addon">Plugin / addon (plik .zip)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="submit-name">Nazwa <span class="req">*</span></label>
+              <input class="form-input" id="submit-name" type="text" required placeholder="np. Nordowy ciemny">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="submit-author">Autor</label>
+              <input class="form-input" id="submit-author" type="text" placeholder="Twoja nazwa użytkownika">
+            </div>
+            <div class="form-field full">
+              <label class="form-label" for="submit-desc">Opis <span class="req">*</span></label>
+              <textarea class="form-textarea" id="submit-desc" required rows="4" placeholder="Co zawiera motyw lub plugin…"></textarea>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="submit-version">Wersja</label>
+              <input class="form-input" id="submit-version" type="text" placeholder="np. 1.0.0">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="submit-install">Plik do instalacji (URL do .css lub .zip) <span class="req">*</span></label>
+              <input class="form-input" id="submit-install" type="url" required placeholder="https://raw.githubusercontent.com/u/repo/main/motyw.css">
+              <p class="form-note">Musi być publiczny, bezpośredni link do pliku (np. GitHub raw). URL musi zaczynać się od https://.</p>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="submit-preview">Podgląd (opcjonalny)</label>
+              <input class="form-input" id="submit-preview" type="url" placeholder="https://.../preview.png">
+              <p class="form-note">Opcjonalny obrazek podglądu motywu lub addonu.</p>
+            </div>
+            <div class="form-field" id="submit-game-field" style="display:none;">
+              <label class="form-label" for="submit-game">Gra (dla pluginów, opcjonalnie)</label>
+              <input class="form-input" id="submit-game" type="text" placeholder="np. Minecraft, Stardew Valley">
+            </div>
+          </div>
+          <p id="submit-error" class="form-error" style="display:none;"></p>
+          <button type="submit" class="btn primary" id="submit-btn">Wyślij zgłoszenie na GitHub</button>
+        </form>
+        <div class="submit-checklist card">
+          <h3>Wymagania</h3>
+          <ul class="checklist">
+            <li><strong>SHA-256</strong> jest liczony automatycznie przez launchera przy instalacji — nie musisz go podawać.</li>
+            <li>Plik musi być <strong>publicznie dostępny</strong> pod podanym URL (np. GitHub gist / release / repo — raw URL), bez logowania.</li>
+            <li>Zgłoszenie musi być zgodne z zasadami: <strong>brak malware i reklam</strong>.</li>
+            <li>Motyw może zawierać <strong>wyłącznie zmienne tokenów CSS</strong> (nie nadpisuje cudzych stylów poza własnymi tokenami).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -210,6 +272,112 @@
         render(items, 'all');
       })
       .catch(showError);
+  })();
+
+  // ---- Formularz zgłoszenia motywu / pluginu → GitHub issue form ----
+  (function submitForm() {
+    var form = document.getElementById('submit-form');
+    var typeSelect = document.getElementById('submit-type');
+    var gameField = document.getElementById('submit-game-field');
+    var errorEl = document.getElementById('submit-error');
+    var btn = document.getElementById('submit-btn');
+
+    if (!form) return;
+
+    // Pokazuj pole „gra" tylko dla addonów
+    function toggleGameField() {
+      gameField.style.display = typeSelect.value === 'addon' ? 'block' : 'none';
+    }
+    typeSelect.addEventListener('change', toggleGameField);
+    toggleGameField();
+
+    function hideError() {
+      errorEl.style.display = 'none';
+      errorEl.textContent = '';
+    }
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.style.display = 'block';
+    }
+
+    // URL musi istnieć (dla opcjonalnych) i zaczynać się od https://
+    function isValidHttpsUrl(value) {
+      if (!value) return true;
+      try {
+        var url = new URL(value);
+        return url.protocol === 'https:';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function fieldValue(id) {
+      var el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      hideError();
+
+      var type = fieldValue('submit-type');
+      var name = fieldValue('submit-name');
+      var author = fieldValue('submit-author');
+      var desc = fieldValue('submit-desc');
+      var version = fieldValue('submit-version');
+      var install = fieldValue('submit-install');
+      var preview = fieldValue('submit-preview');
+      var game = fieldValue('submit-game');
+
+      if (!name || !desc) {
+        showError('Nazwa i opis są wymagane.');
+        return;
+      }
+      if (!install || !isValidHttpsUrl(install)) {
+        showError('Podaj poprawny URL do pliku (https://) — wymagane.');
+        return;
+      }
+      if (!isValidHttpsUrl(preview)) {
+        showError('URL podglądu musi zaczynać się od https://.');
+        return;
+      }
+
+      var prefix = type === 'theme' ? 'motyw' : 'plugin';
+      var template = type === 'theme' ? 'theme-submission.yml' : 'plugin-submission.yml';
+      var title = '[' + prefix + '] ' + name;
+
+      var lines = [];
+      lines.push('### Typ\n' + (type === 'theme' ? 'Motyw' : 'Plugin'));
+      lines.push('### Nazwa\n' + name);
+      if (author) lines.push('### Autor\n' + author);
+      lines.push('### Opis\n' + desc);
+      if (version) lines.push('### Wersja\n' + version);
+      lines.push('### Plik instalacyjny\n' + install);
+      if (preview) lines.push('### Podgląd\n' + preview);
+      if (game) lines.push('### Gra\n' + game);
+
+      var body = lines.join('\n\n');
+      var url = 'https://github.com/ace2821/zinc-marketplace/issues/new?template=' +
+        encodeURIComponent(template) +
+        '&title=' + encodeURIComponent(title) +
+        '&body=' + encodeURIComponent(body);
+
+      console.log('[submit] Generated issue URL:', url);
+
+      var win = window.open(url, '_blank', 'noopener');
+      if (win) {
+        win.opener = null;
+      } else {
+        // Fallback jeśli przeglądarka zablokuje wyskakujące okno
+        showError('Przeglądarka zablokowała wyskakujące okno — zezwól na wyskakujące okna dla tej strony i spróbuj ponownie.');
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      btn.click();
+    });
   })();
 })();
 </script>
